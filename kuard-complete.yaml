@@ -1,0 +1,144 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kuard
+  labels:
+    istio-injection: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kuard
+    version: blue
+  name: kuard-blue
+  namespace: kuard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: kuard
+        version: blue
+    spec:
+      containers:
+      - image: gcr.io/kuar-demo/kuard-amd64:blue
+        name: kuard-blue
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kuard-blue
+  namespace: kuard
+spec:
+  selector:
+    app: kuard
+    version: blue
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kuard
+    version: green
+  name: kuard-green
+  namespace: kuard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard
+      version: green
+  template:
+    metadata:
+      labels:
+        app: kuard
+        version: green
+    spec:
+      containers:
+      - image: gcr.io/kuar-demo/kuard-amd64:green
+        name: kuard-green
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kuard-green
+  namespace: kuard
+spec:
+  selector:
+    app: kuard
+    version: green
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kuard
+    version: purple
+  name: kuard-purple
+  namespace: kuard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard
+      version: purple
+  template:
+    metadata:
+      labels:
+        app: kuard
+        version: purple
+    spec:
+      containers:
+      - image: gcr.io/kuar-demo/kuard-amd64:purple
+        name: kuard-purple
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kuard-purple
+  namespace: kuard
+spec:
+  selector:
+    app: kuard
+    version: purple
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kuard
+  namespace: kuard
+spec:
+  selector:
+    app: kuard
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      name: http

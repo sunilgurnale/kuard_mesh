@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: "2023-06-01T12:38:30Z"
+  labels:
+    app: httpd
+    app.kubernetes.io/component: httpd
+    app.kubernetes.io/instance: httpd
+  name: httpd
+  namespace: kuard
+  resourceVersion: "4358485"
+  uid: 057b9315-e9f5-423f-a1ad-6c432a5580e5
+spec:
+  clusterIP: 172.30.38.130
+  clusterIPs:
+  - 172.30.38.130
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  - name: 8443-tcp
+    port: 8443
+    protocol: TCP
+    targetPort: 8443
+  selector:
+    deployment: httpd
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

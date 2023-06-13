@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"kuard-green","namespace":"kuard"},"spec":{"ports":[{"name":"http","port":8080,"protocol":"TCP","targetPort":8080}],"selector":{"app":"kuard","version":"green"}}}
+  creationTimestamp: "2023-06-01T12:37:27Z"
+  name: kuard-green
+  namespace: kuard
+  resourceVersion: "4357920"
+  uid: 68e54011-5fe8-4d10-b480-ffdcc45880ca
+spec:
+  clusterIP: 172.30.241.239
+  clusterIPs:
+  - 172.30.241.239
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: kuard
+    version: green
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

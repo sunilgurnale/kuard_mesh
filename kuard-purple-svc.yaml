@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"kuard-purple","namespace":"kuard"},"spec":{"ports":[{"name":"http","port":8080,"protocol":"TCP","targetPort":8080}],"selector":{"app":"kuard","version":"purple"}}}
+  creationTimestamp: "2023-06-01T12:37:27Z"
+  name: kuard-purple
+  namespace: kuard
+  resourceVersion: "4357930"
+  uid: f109fd78-9e59-4c0a-b964-4bbaa0d4577f
+spec:
+  clusterIP: 172.30.79.153
+  clusterIPs:
+  - 172.30.79.153
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: kuard
+    version: purple
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
